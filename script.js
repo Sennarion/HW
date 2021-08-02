@@ -20,7 +20,6 @@ function howManyFilms(e) {
 input.addEventListener('input', howManyFilms);
 
 
-
 // /* TASK 2 ---------------------------------------------------------- */
 
 // const INGREDIENTS = {
