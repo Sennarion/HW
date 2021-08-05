@@ -17,9 +17,10 @@ function randomSpeed(min, max) {
 }
 
 let squares = [];
+
 function addSquares() {
 	let square = {
-		x: random(0, 610),
+		x: random(0, canvas.width - 30),
 		y: -30,
 		width: 30,
 		height: 30,
@@ -29,9 +30,7 @@ function addSquares() {
 	squares.push(square);
 }
 
-
-function animate() {
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
+function drawSquares() {
 	for (let i = 0; i < squares.length; i++) {
 		ctx.beginPath();
 		ctx.rect(squares[i].x, squares[i].y, squares[i].width, squares[i].height);
@@ -40,6 +39,11 @@ function animate() {
 		ctx.closePath();
 		squares[i].y += squares[i].speed;
 	}
+}
+
+function animate() {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	drawSquares()
 	requestAnimationFrame(animate);
 }
 
