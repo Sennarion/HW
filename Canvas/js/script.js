@@ -30,6 +30,8 @@ function addSquares() {
 	squares.push(square);
 }
 
+
+
 function drawSquares() {
 	for (let i = 0; i < squares.length; i++) {
 		ctx.beginPath();
@@ -38,6 +40,14 @@ function drawSquares() {
 		ctx.fill();
 		ctx.closePath();
 		squares[i].y += squares[i].speed;
+	}
+}
+
+function deleteSquares(event) {
+	for (let i = 0; i < squares.length; i++) {
+		if (squares[i].x <= event.offsetX && squares[i].x + 30 >= event.offsetX && squares[i].y <= event.offsetY && squares[i].y + 30 >= event.offsetY) {
+			squares.splice(i, 1);
+		}
 	}
 }
 
@@ -52,4 +62,5 @@ function startGame() {
 }
 
 startButton.addEventListener('click', startGame);
+canvas.addEventListener('click', deleteSquares);
 document.body.onload = animate;
