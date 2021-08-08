@@ -33,14 +33,14 @@ function addSquares() {
 }
 
 function drawSquares() {
-	for (let i = 0; i < squares.length; i++) {
+	squares.forEach(function(element) {
 		ctx.beginPath();
-		ctx.rect(squares[i].x, squares[i].y, squares[i].width, squares[i].height);
-		ctx.fillStyle = squares[i].color;
+		ctx.rect(element.x, element.y, element.width, element.height);
+		ctx.fillStyle = element.color;
 		ctx.fill();
 		ctx.closePath();
-		squares[i].y += squares[i].speed;
-	}
+		element.y += element.speed;
+	})
 }
 
 function deleteSquares(event) {
