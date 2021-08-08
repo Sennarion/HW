@@ -2,6 +2,8 @@ const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
 let startButton = document.querySelector('.start');
 let stopButton = document.querySelector('.stop');
+let score = document.querySelector('#score');
+let interval;
 
 
 function random(min, max) {
@@ -30,8 +32,6 @@ function addSquares() {
 	squares.push(square);
 }
 
-
-
 function drawSquares() {
 	for (let i = 0; i < squares.length; i++) {
 		ctx.beginPath();
@@ -47,20 +47,28 @@ function deleteSquares(event) {
 	for (let i = 0; i < squares.length; i++) {
 		if (squares[i].x <= event.offsetX && squares[i].x + 30 >= event.offsetX && squares[i].y <= event.offsetY && squares[i].y + 30 >= event.offsetY) {
 			squares.splice(i, 1);
+			score.innerHTML++;
 		}
 	}
 }
 
+function reset() {
+	clearInterval(interval);
+	squares.splice(0, squares.length);
+	score.innerHTML = 0;
+}
+
 function animate() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	drawSquares()
+	drawSquares();
 	requestAnimationFrame(animate);
 }
 
 function startGame() {
-	setInterval(addSquares, random(200, 2000))
+	interval = setInterval(addSquares, random(200, 2000));
 }
 
 startButton.addEventListener('click', startGame);
+stopButton.addEventListener('click', reset);
 canvas.addEventListener('click', deleteSquares);
 document.body.onload = animate;
