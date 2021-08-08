@@ -44,12 +44,12 @@ function drawSquares() {
 }
 
 function deleteSquares(event) {
-	for (let i = 0; i < squares.length; i++) {
-		if (squares[i].x <= event.offsetX && squares[i].x + 30 >= event.offsetX && squares[i].y <= event.offsetY && squares[i].y + 30 >= event.offsetY) {
-			squares.splice(i, 1);
+	squares.forEach(function(element) {
+		if (element.x <= event.offsetX && element.x + 30 >= event.offsetX && element.y <= event.offsetY && element.y + 30 >= event.offsetY) {
+			squares.splice(squares.indexOf(element), 1);
 			score.innerHTML++;
 		}
-	}
+	})
 }
 
 function reset() {
