@@ -33,7 +33,7 @@ console.log(aspirant.isGrantHolder());
 
 for (let key in aspirant) {
     console.log(`Method/Property - ${key}`);
-// }
+}
 
 
 // /* TASK 2 ---------------------------------------------------------- */
