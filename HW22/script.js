@@ -1,44 +1,42 @@
-// TASK 1
+// /* TASK 1 ---------------------------------------------------------- */
 
-// const student = {
-//     firstName: 'Hannibal',
-//     lastName: 'Lecter',
-//     averageScore: 4.8,
-//     isGrantHolder() {
-//         if (this.averageScore >= 4) {
-//             return true
-//         } else return false
-//     },
-//     getFullName() {
-//         console.log(`${this.firstName} ${this.lastName}, ${this.isGrantHolder()}`); 
-//     }
+const student = {
+    firstName: 'Hannibal',
+    lastName: 'Lecter',
+    averageScore: 4.8,
+    isGrantHolder() {
+        if (this.averageScore >= 4) {
+            return true
+        } else return false
+    },
+    getFullName() {
+        console.log(`${this.firstName} ${this.lastName}, ${this.isGrantHolder()}`); 
+    }
+}
+
+student.getFullName();
+
+function Aspirant() {
+    this.dissertationTopic = 'Test';
+    this.isDissertationComplete = false;
+    this.isGrantHolder = function() {
+        if (this.averageScore >= 4.5 && this.isDissertationComplete) {
+            return true
+        } else return false
+    }
+}
+
+Aspirant.prototype = student;
+let aspirant = new Aspirant();
+console.log(student.isGrantHolder());
+console.log(aspirant.isGrantHolder());
+
+for (let key in aspirant) {
+    console.log(`Method/Property - ${key}`);
 // }
 
-// student.getFullName();
 
-// function Aspirant() {
-//     this.dissertationTopic = 'Test';
-//     this.isDissertationComplete = false;
-//     this.isGrantHolder = function() {
-//         if (this.averageScore >= 4.5 && this.isDissertationComplete) {
-//             return true
-//         } else return false
-//     }
-// }
-
-// Aspirant.prototype = student;
-// let aspirant = new Aspirant();
-// console.log(student.isGrantHolder());
-// console.log(aspirant.isGrantHolder());
-
-// for (let value in aspirant) {
-//     console.log(`Method/Property - ${value}`);
-// }
-
-
-
-
-// TASK 2
+// /* TASK 2 ---------------------------------------------------------- */
 
 // class Plane {
 //     constructor(name) {
@@ -56,13 +54,8 @@
 // let airport = {
 //     planes: [],
 //     getFlyingPlanes() {
-//         let arr = [];
-//         for (let i = 0; i < this.planes.length; i++) {
-//             if (this.planes[i].isFlying) {
-//                 arr.push(this.planes[i]);
-//             }
-//         }
-//         return arr.length;
+//         let flyingPlanes = this.planes.filter(el => el.isFlying)
+//         return flyingPlanes.length;
 //     }
 // }
 
