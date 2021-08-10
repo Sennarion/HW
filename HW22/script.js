@@ -5,29 +5,23 @@ const student = {
     lastName: 'Lecter',
     averageScore: 4.8,
     isGrantHolder() {
-        if (this.averageScore >= 4) {
-            return true
-        } else return false
+        return this.averageScore >= 4;
     },
     getFullName() {
-        console.log(`${this.firstName} ${this.lastName}, ${this.isGrantHolder()}`); 
+        return (`${this.firstName} ${this.lastName}`); 
     }
 }
 
-student.getFullName();
-
-function Aspirant() {
-    this.dissertationTopic = 'Test';
-    this.isDissertationComplete = false;
+function Aspirant(dissertationTopic, isDissertationComplete) {
+    this.dissertationTopic = dissertationTopic;
+    this.isDissertationComplete = isDissertationComplete;
     this.isGrantHolder = function() {
-        if (this.averageScore >= 4.5 && this.isDissertationComplete) {
-            return true
-        } else return false
+        return this.averageScore >= 4.5 && this.isDissertationComplete;
     }
 }
 
 Aspirant.prototype = student;
-let aspirant = new Aspirant();
+let aspirant = new Aspirant('Test', false);
 console.log(student.isGrantHolder());
 console.log(aspirant.isGrantHolder());
 
@@ -38,35 +32,35 @@ for (let key in aspirant) {
 
 // /* TASK 2 ---------------------------------------------------------- */
 
-// class Plane {
-//     constructor(name) {
-//         this.name = name;
-//         this.isFlying = false;
-//         this.takeOff = function() {
-//             return this.isFlying = true;
-//         }
-//         this.land = function() {
-//             return this.isFlying = false;
-//         }
-//     }
-// }
+class Plane {
+    constructor(name) {
+        this.name = name;
+        this.isFlying = false;
+    }
+    takeOff() {
+        return this.isFlying = true;
+    }
+    land() {
+        return this.isFlying = false;
+    }
+}
 
-// let airport = {
-//     planes: [],
-//     getFlyingPlanes() {
-//         let flyingPlanes = this.planes.filter(el => el.isFlying)
-//         return flyingPlanes.length;
-//     }
-// }
+let airport = {
+    planes: [],
+    getFlyingPlanes() {
+        let flyingPlanes = this.planes.filter(el => el.isFlying)
+        return flyingPlanes.length;
+    }
+}
 
-// let plane1 = new Plane('Monster');
-// plane1.takeOff();
-// let plane2 = new Plane('Killer');
-// let plane3 = new Plane('Godzilla');
-// plane3.takeOff();
-// let plane4 = new Plane('Hulk');
-// let plane5 = new Plane('Storm');
-// plane5.takeOff();
-// airport.planes.push(plane1, plane2, plane3, plane4, plane5);
+let plane1 = new Plane('Monster');
+plane1.takeOff();
+let plane2 = new Plane('Killer');
+let plane3 = new Plane('Godzilla');
+plane3.takeOff();
+let plane4 = new Plane('Hulk');
+let plane5 = new Plane('Storm');
+plane5.takeOff();
+airport.planes.push(plane1, plane2, plane3, plane4, plane5);
 
-// console.log(airport.getFlyingPlanes());
+console.log(airport.getFlyingPlanes());
