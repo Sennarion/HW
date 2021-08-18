@@ -1,7 +1,7 @@
 const container = document.querySelector('.container');
-createCard();
+const form = document.querySelector('.form-container');
 
-function createCard() {
+function createCard(element) {
 	const card = document.createElement('div');
 	card.classList.add('card');
 
@@ -11,8 +11,7 @@ function createCard() {
 	const cardTitle = document.createElement('div');
 	cardTitle.classList.add('title');
 	const cardTitleH1 = document.createElement('h1');
-	cardTitleH1.classList.add('name');
-	cardTitleH1.innerHTML = 'firstName lastName';
+	cardTitleH1.innerHTML = element.name;
 	cardTitle.append(cardTitleH1);
 
 	const cardStatus = document.createElement('div');
@@ -21,8 +20,12 @@ function createCard() {
 	cardLiveStatus.classList.add('live-status');
 
 	const cardStatusP = document.createElement('p');
-	cardStatusP.classList.add('live-status-text');
-	const cardStatusPText = document.createTextNode('species -- status');
+	const cardStatusPText = document.createTextNode(`${element.species} -- ${element.status}`);
+
+	if (element.status == 'Dead') {
+		cardLiveStatus.classList.add('dead');
+	}
+
 	cardStatus.append(cardLiveStatus);
 	cardStatusP.append(cardStatusPText);
 	cardStatus.append(cardStatusP);
@@ -31,7 +34,7 @@ function createCard() {
 
 	const cardContent = document.createElement('div');
 	cardContent.classList.add('content');
-	const cardContentText = document.createTextNode('Their location');
+	const cardContentText = document.createTextNode(element.location.name);
 	cardContent.append(cardContentText);
 	cardInfo.append(cardContent);
 
@@ -40,43 +43,53 @@ function createCard() {
 	const cardImage = document.createElement('div');
 	cardImage.classList.add('card-image');
 	const image = document.createElement('img');
-	image.classList.add('image');
-	image.src = 'https://static.remove.bg/remove-bg-web/bf554ca6716508caedc52f1ac289b1eec29b6734/assets/start_remove-79a4598a05a77ca999df1dcb434160994b6fde2c3e9101984fb1be0f16d0a74e.png';
-	image.alt = 'Some image';
+	image.src = element.image;
+	image.alt = `${element.name} image`;
 	cardImage.append(image);
 	card.append(cardImage);
 	container.append(card);
 }
 
-const characterName = document.querySelector('.name');
-const statusIcon = document.querySelector('.live-status');
-const liveStatus = document.querySelector('.live-status-text');
-const characterLocation = document.querySelector('.content');
-const image = document.querySelector('.image');
-
-
 async function getCharacter() {
-	let response = await fetch('https://rickandmortyapi.com/api/character');
+	let response = await fetch('https://rickandmortyapi.com/api/character/2,4,6,8,10,12,14,16');
 	return response.json();
 }
 
 async function start() {
 	let data = await getCharacter();
-	let arr = data.results;
-	console.log(arr);
-	arr.forEach(element => {
-		createCard(); // для каждого элемента массива я создаю новую карточку, и хочу чтобы весь код ниже выполнялся для новой карточки
-		image.src = element.image;
-		characterName.innerHTML = element.name;
-		if (element.status == 'Dead') {
-			statusIcon.classList.add('dead');
-		}
-		liveStatus.innerHTML = `${element.species} -- ${element.status}`;
-		characterLocation.innerHTML = element.location.name;
+	data.forEach(element => {
+		createCard(element);
 	});
 }
 
 start();
 
 
+function clearContainer() {
+	while (container.firstChild) {
+		container.removeChild(container.firstChild);
+	}
+}
 
+async function filterCharacters(event) {
+	clearContainer();
+	if (event.target.htmlFor == 'male' || event.target.htmlFor == 'female') {
+		let response = await fetch(`https://rickandmortyapi.com/api/character/?gender=${event.target.htmlFor}`);
+		let data = await response.json();
+		let { results } = data;
+		results.forEach(element => {
+			createCard(element);
+		});
+	}
+	if (event.target.htmlFor == 'alive' || event.target.htmlFor == 'dead') {
+		let response = await fetch(`https://rickandmortyapi.com/api/character/?status=${event.target.htmlFor}`);
+		let data = await response.json();
+		let { results } = data;
+		results.forEach(element => {
+			createCard(element);
+		});
+	}
+}
+
+
+form.addEventListener('click', filterCharacters);
