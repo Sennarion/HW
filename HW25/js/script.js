@@ -50,13 +50,13 @@ function createCard(element) {
 	container.append(card);
 }
 
-async function getCharacter() {
-	let response = await fetch('https://rickandmortyapi.com/api/character/2,4,6,8,10,12,14,16');
+async function getCharacter( ...arguments ) {
+	let response = await fetch(`https://rickandmortyapi.com/api/character/${arguments}`);
 	return response.json();
 }
 
 async function start() {
-	let data = await getCharacter();
+	let data = await getCharacter(2,6,8,10,12,16,18,20);
 	data.forEach(element => {
 		createCard(element);
 	});
