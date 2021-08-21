@@ -5,4 +5,3 @@ const needfulThings = allThings
     .join(', ');
 
 console.log(needfulThings);
-
