@@ -30,25 +30,23 @@ export default class Hospital {
     }
 
     findHome(nickname) {
-        let arr = [];
+        let animalNames = [];
         this.illAnimals.forEach(element => {
-            arr.push(element.nickname);
+            animalNames.push(element.nickname);
         });
-        console.log(arr);
-        if (arr.includes(nickname)) {
-            console.log('test');
+        if (animalNames.includes(nickname)) {
             return {
                 status: `restricted`,
                 message: `We need to heal ${nickname} firstly`,
             }
         } else {
             let randomPerson = Math.floor(Math.random() * this.findingPetsPeople.length);
-            console.log(this.findingPetsPeople[randomPerson].firstName);
-            // this.findingPetsPeople.splice(randomPerson, 1);
-
+            let deletedName = this.findingPetsPeople[randomPerson].firstName;
+            let deletedLastname = this.findingPetsPeople[randomPerson].lastName;
+            this.findingPetsPeople.splice(randomPerson, 1);
             return {
                 status: `success`,
-                name: `${this.findingPetsPeople[randomPerson].firstName} ${this.findingPetsPeople[randomPerson].lastName}`,
+                name: `${deletedName} ${deletedLastname}`,
             }
         }
     }
