@@ -1,80 +1,50 @@
 import Person from './person';
-import Animal from './animal';
 import Hospital from './hospital';
 import Dog from './dog';
 import Cat from './cat';
 import Veterinarian from './veterinarian';
 
+function main() {
+    const newHospital = new Hospital(`VetExpert`);
+    const newVeterinarian = new Veterinarian(`Steve`, `Irwin`, newHospital);
 
-let newPerson = new Person(`Serhii`, `Reznichenko`);
-console.log(newPerson.getFullName());
+    newHospital.addPeople(new Person('Marilyn', 'Monroe'));
+    newHospital.addPeople(new Person('Mother', 'Teresa'));
+    newHospital.addPeople(new Person('Leonardo', 'daVinci'));
+    newHospital.addPeople(new Person('George', 'Orwell'));
+    newHospital.addPeople(new Person('Michael', 'Jordon'));
+    newHospital.addPeople(new Person('Ronald', 'Reagan'));
 
-let newAnimal = new Animal(`Smoky`, `Whiskas`, `Kharkiv`)
-newAnimal.changeFood(`Friskies`);
-console.log(newAnimal.food);
+    let dog1 = new Dog('April', 'Cesar', 'Kharkiv', 9500);
+    let dog2 = new Dog('Chico', 'Pedigree', 'Kyiv', 21000);
+    let dog3 = new Dog('Larry', 'Korm', 'Lviv', 3600);
+    let cat1 = new Cat('Smoky', 'Whiskas', 'Kharkiv');
+    let cat2 = new Cat('Tango', 'Korm', 'Odessa', false);
+    let cat3 = new Cat('Leo', 'Felix', 'Lutsk', false);
 
-let newHospital = new Hospital(`Veterinarium`);
-newHospital.addAnimal('Smoky', 'Whiskas', 'Kharkiv');
-newHospital.addAnimal('Pushok', 'Friskies', 'Kiev');
-newHospital.addPeople('Serhii', 'Reznichenko');
-newHospital.addPeople('Lisa', 'Holubenko');
-console.log(newHospital.findHome('Pushok'))
+    
 
-console.log(newHospital.getAnimals());
-console.log(newHospital.getFindingPetsPeople());
-
-
-let newTest = new Dog('Smok', 'Friskies', 'New York', 700);
-console.log(newTest);
-
-
-
-
-
-
-
-
-
-
-let persons = ['Marilyn Monroe', 'Mother Teresa', 'Leonardo da Vinci', 'George Orwell', 'Michael Jordon', 'Ronald Reagan'];
-nickname, food, location, weight
-let dogs = [
-    { 
-        nickname: 'April', 
-        food: 'Cesar', 
-        location: 'Kharkiv', 
-        weight: 6500
-    },
-    { 
-        nickname: 'Chico', 
-        food: 'Pedigree', 
-        location: 'Kyiv', 
-        weight: 9400
-    },
-    { 
-        nickname: 'Larry', 
-        food: 'Bakers', 
-        location: 'Lviv', 
-        weight: 3600
+    function goToVeterinarian(animal) {
+        console.group(newVeterinarian.getFullName());
+        let conclusion = newVeterinarian.treatAnimal(animal);
+        console.log(conclusion.info);
+        console.log(conclusion.fullDiagnos);
+        console.groupEnd();
     }
-]
 
+    goToVeterinarian(cat1);
+    goToVeterinarian(cat2);
+    goToVeterinarian(cat3);
+    goToVeterinarian(dog1);
+    goToVeterinarian(dog2);
+    goToVeterinarian(dog3);
 
-let cats = [
-    { 
-        nickname: 'Smoky', 
-        food: 'Whiskas', 
-        location: 'Kharkiv', 
-    },
-    { 
-        nickname: 'Tango', 
-        food: 'Friskies', 
-        location: 'Odessa', 
-        isHomless: false,
-    },
-    { 
-        nickname: 'Leo ', 
-        food: 'Felix', 
-        location: 'Lutsk', 
-    }
-]
+    let illAnimalNicknames = newHospital.getAnimals().map(el => el.nickname)
+    console.log('Animals in the hospital: ' + illAnimalNicknames);
+
+    console.log(newHospital.getFindingPetsPeople());
+    console.log(newHospital.getAnimals());
+}
+
+main();
+
