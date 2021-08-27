@@ -23,13 +23,11 @@ export default class Veterinarian extends Person {
             }
         } 
         else if (animal.food == 'Korm') {
-            // animal.changeFood('Meal with rice');
             return {
                 diagnosis: this.#diagnosis.ill,
-                info: `Change food. Now ${animal.nickname} eats ${animal.food}`,
+                info: `Change food. Now ${animal.nickname} eats ${animal.changeFood('Meal with rice')}`,
             }
         } else if (!animal.isHomless) {
-            console.log('test');
             return {
                 diagnosis: this.#diagnosis.healthy,
                 info: `Сhange home. Now ${this.hospital.findHome(animal.nickname).name} have a new friend - ${animal.nickname}`,
@@ -42,13 +40,13 @@ export default class Veterinarian extends Person {
     }
 
     treatAnimal(animal) {
-        let diagnosis = this._setDiagnosis(animal).diagnosis;
-        if (diagnosis !== 'healthy') {
+        let diagnosis = this._setDiagnosis(animal);
+        if (diagnosis.diagnosis !== 'healthy') {
             this.hospital.addAnimal(animal);
         }
         return {
             info: `${animal.nickname} from ${animal.location}`,
-            fullDiagnos: `${this._setDiagnosis(animal).diagnosis}: ${this._setDiagnosis(animal).info}`,
+            fullDiagnos: `${diagnosis.diagnosis}: ${diagnosis.info}`,
         }
     }
 }

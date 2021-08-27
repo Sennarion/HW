@@ -22,28 +22,20 @@ function main() {
     let cat2 = new Cat('Tango', 'Korm', 'Odessa', false);
     let cat3 = new Cat('Leo', 'Felix', 'Lutsk', false);
 
-    
-
-    function goToVeterinarian(animal) {
-        console.group(newVeterinarian.getFullName());
-        let conclusion = newVeterinarian.treatAnimal(animal);
-        console.log(conclusion.info);
-        console.log(conclusion.fullDiagnos);
-        console.groupEnd();
+    function goToVeterinarian( ...args ) {
+        args.forEach(function(el) {
+            console.group(newVeterinarian.getFullName());
+            let conclusion = newVeterinarian.treatAnimal(el);
+            console.log(conclusion.info);
+            console.log(conclusion.fullDiagnos);
+            console.groupEnd();
+        })
     }
 
-    goToVeterinarian(cat1);
-    goToVeterinarian(cat2);
-    goToVeterinarian(cat3);
-    goToVeterinarian(dog1);
-    goToVeterinarian(dog2);
-    goToVeterinarian(dog3);
+    goToVeterinarian(cat1, cat2, cat3, dog1, dog2, dog3);
 
-    let illAnimalNicknames = newHospital.getAnimals().map(el => el.nickname)
+    let illAnimalNicknames = newHospital.getAnimals().map(el => el.nickname);
     console.log('Animals in the hospital: ' + illAnimalNicknames);
-
-    console.log(newHospital.getFindingPetsPeople());
-    console.log(newHospital.getAnimals());
 }
 
 main();
