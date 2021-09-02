@@ -79,36 +79,22 @@ const students = [{
 
 function randomId() {
     let id = '1';
-    for (let i = 0; i <= 4; i++) {
+    for (let i = 0; i <= 6; i++) {
         id += Math.floor(10 * Math.random());
     }
     return Number(id);
 }
 
-
 class Student {
     id = randomId();
     isSelfPayment = true;
-    constructor ({ name, surname, ratingPoint, schoolPoint } = enrollee) {
+    constructor({ name, surname, ratingPoint, schoolPoint } = enrollee) {
         this.name = name;
         this.surname = surname;
         this.ratingPoint = ratingPoint;
         this.schoolPoint = schoolPoint;
     }
 }
-
-let newStudent0 = new Student(students[0]);
-let newStudent1 = new Student(students[1]);
-let newStudent2 = new Student(students[2]);
-let newStudent3 = new Student(students[3]);
-let newStudent4 = new Student(students[4]);
-let newStudent5 = new Student(students[5]);
-let newStudent6 = new Student(students[6]);
-let newStudent7 = new Student(students[7]);
-let newStudent8 = new Student(students[8]);
-let newStudent9 = new Student(students[9]);
-let newStudent10 = new Student(students[10]);
-
 
 class University {
     #allStudents = [];
@@ -119,11 +105,17 @@ class University {
 
     addStudent(student) {
         this.#allStudents.push(student);
-        // let studentRating = student.ratingPoint + student.schoolPoint;
+
+        // сразу сортируем студентов по рейтингу
         this.#allStudents.sort((a, b) => (b.ratingPoint + b.schoolPoint) - (a.ratingPoint + a.schoolPoint));
-        if (student.ratingPoint >= 800 && (this.#allStudents.indexOf(student) < 5)) {
-            student.isSelfPayment = false;
-        }
+
+        // проходим по каждому студенту, и при соблюдении условий переводим их на бюджет
+        this.#allStudents.forEach((st) => {
+            st.isSelfPayment = true;
+            if (st.ratingPoint >= 800 && (this.#allStudents.indexOf(st) < 5)) {
+                st.isSelfPayment = false;
+            }
+        })
     }
 
     getAllStudents() {
@@ -135,22 +127,9 @@ class University {
     }
 }
 
-let newUniversity = new University('Harvard University');
-newUniversity.addStudent(newStudent0);
-newUniversity.addStudent(newStudent1);
-newUniversity.addStudent(newStudent2);
-newUniversity.addStudent(newStudent3);
-newUniversity.addStudent(newStudent4);
-newUniversity.addStudent(newStudent5);
-newUniversity.addStudent(newStudent6);
-newUniversity.addStudent(newStudent7);
-newUniversity.addStudent(newStudent8);
-newUniversity.addStudent(newStudent9);
-newUniversity.addStudent(newStudent10);
+const newUniversity = new University('Harvard University');
+
+students.forEach(student => newUniversity.addStudent(new Student(student)));
+
 console.log(newUniversity.getAllStudents());
 console.log(newUniversity.getFreePaymentStudents());
-
-
-
-
-
