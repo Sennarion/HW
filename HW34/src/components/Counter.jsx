@@ -1,7 +1,7 @@
 function Counter() {
     return (
         <div>
-            <p className="count-title">Count of songs: <span className="count"> 0 </span></p>
+            <p>Count of songs: <span className="count"> 0 </span></p>
         </div>
     );
 };

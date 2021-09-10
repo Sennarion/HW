@@ -1,15 +1,15 @@
-import LikeButton from "./LikeButton";
-import DeleteButton from "./DeleteButton";
+import LikeButton from "./UI/button/LikeButton";
+import SongButton from "./UI/button/SongButton";
 
-function SongItem({ song }) {
+function SongItem({ song, deleteSong }) {
     return (
-        <div className="song-item">
-            <p className="song-id">{song.id}</p>
-            <p>{song.songName}</p>
-            <p>{song.authorName}</p>
-            <p>{song.releaseDate}</p>
-            <p>{song.albumName}</p>
-            <DeleteButton />
+        <div>
+            <p>ID: {song.id}</p>
+            <p>Song Name: {song.songName}</p>
+            <p>Author Name: {song.authorName}</p>
+            <p>Release Date: {song.releaseDate}</p>
+            <p>Album Name: {song.albumName}</p>
+            <SongButton onClick={() => deleteSong(song.id)}>Delete</SongButton>
             <LikeButton />
         </div>
     );

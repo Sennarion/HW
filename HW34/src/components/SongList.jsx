@@ -1,10 +1,12 @@
 import SongItem from "./SongItem";
 
-function AddNewSong({ songs }) {
+function AddNewSong({ songs, deleteSong }) {
     return (
-        <div className="songs-wrapper">
+        <div>
             {
-                songs.map(song => <SongItem song={song} key={song.id} />)
+                songs.length
+                    ? songs.map(song => <SongItem song={song} key={song.id} deleteSong={deleteSong} />)
+                    : <h2 style={{ textAlign: 'center' }}>Please add a new song</h2>
             }
         </div>
     );
