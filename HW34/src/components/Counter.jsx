@@ -1,7 +1,9 @@
-function Counter() {
+import classes from "./style/Counter.module.css";
+
+function Counter({ songs }) {
     return (
-        <div>
-            <p>Count of songs: <span className="count"> 0 </span></p>
+        <div className={classes.Counter}>
+            <p>Count of songs: <span>{songs.length}</span></p>
         </div>
     );
 };

@@ -1,0 +1,13 @@
+.Wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.Wrapper input {
+    padding: 12px;
+    margin: 5px;
+}
+
+.Wrapper input:focus {
+    background-color: rgb(255, 250, 240);
+}

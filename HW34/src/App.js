@@ -1,5 +1,4 @@
-import Counter from "./components/Counter";
-import AddNewSong from "./components/AddNewSong";
+import CustomInput from "./components/CustomInput";
 import SongList from "./components/SongList";
 import initialSongs from "./songs";
 import { useState } from "react";
@@ -23,10 +22,9 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <AddNewSong addSong={addSong} generateNewId={generateNewId}/>
+    <div>
+      <CustomInput addSong={addSong} generateNewId={generateNewId} songs={songs} />
       <SongList songs={songs} deleteSong={deleteSong} />
-      <Counter />
     </div>
   );
 };

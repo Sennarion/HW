@@ -1,8 +1,9 @@
 import SongItem from "./SongItem";
+import classes from "./style/SongList.module.css";
 
 function AddNewSong({ songs, deleteSong }) {
     return (
-        <div>
+        <div className={classes.SongList}>
             {
                 songs.length
                     ? songs.map(song => <SongItem song={song} key={song.id} deleteSong={deleteSong} />)

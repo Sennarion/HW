@@ -5,12 +5,9 @@
     border: none;
     border-radius: 5px;
     transition: 0.2s ease-in-out;
+    cursor: pointer;
 }
 
 .LikeButton:hover {
-    background-color: rgb(255, 0, 0);
-}
-
-.LikeButton.active {
     background-color: rgb(255, 0, 0);
 }

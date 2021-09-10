@@ -33,6 +33,13 @@ const initialSongs = [
         authorName: 'Michael Jackson',
         releaseDate: '02.01.1983',
         albumName: 'Thriller'
+    },
+    {
+        id: 6,
+        songName: 'Super Trouper',
+        authorName: 'ABBA',
+        releaseDate: '01.05.1980',
+        albumName: 'Single'
     }
 ];
 
