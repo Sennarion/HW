@@ -1,0 +1,17 @@
+.Counter {
+    margin: 0 20px;
+}
+
+.Counter p {
+    text-transform: uppercase;
+}
+
+.Counter p span {
+    display: inline-block;
+    padding: 10px;
+    text-align: center;
+    background-color: rgb(255, 162, 162);
+    border-radius: 5px;
+    font-size: 25px;
+    font-weight: 700;
+}
